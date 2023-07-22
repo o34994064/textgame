@@ -57,6 +57,8 @@ public:
     // 获得经验值
     void gainExperience(int experience) {
         // 处理经验值逻辑
+        if（experience>=levelexp）{level++；experience_
+    -=levelexp；}
     }
 
     // 显示技能列表
