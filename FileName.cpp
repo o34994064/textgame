@@ -12,7 +12,7 @@ class Character {
 public:
     string name;
     int level;      // 等级
-    int experience; // 经验
+    int levelexp; // 经验
     int stamina;    // 耐力
     int strength;   // 力量
     int agility;    // 敏捷
@@ -27,7 +27,7 @@ public:
     Character(string charName, int charStamina, int charStrength, int charAgility, int charIntellect)
         : name(charName), stamina(charStamina), strength(charStrength), agility(charAgility), intellect(charIntellect) {
         level = 1;
-        experience = level * 100;
+        levelexp = level * 100;
         maxHealth = stamina * 10;
         maxMana = intellect * 10;
         attack = strength * 2;
@@ -41,7 +41,7 @@ public:
         cout << "角色属性面板：" << endl;
         cout << "名称：" << name << endl;
         cout << "等级：" << level << endl;
-        cout << "经验值：" << "0/"<<experience << endl;
+        cout << "经验值：" << "0/"<<levelexp << endl;
         cout << "-----------------------------" << endl;
         cout << "耐力：" << stamina << endl;
         cout << "力量：" << strength << endl;
