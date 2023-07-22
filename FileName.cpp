@@ -7,24 +7,27 @@
 
 using namespace std;
 
-// ½ÇÉ«Àà
+// è§’è‰²ç±»
 class Character {
 public:
     string name;
+    int level;      // ç­‰çº§
+    int experience; // ç»éªŒ
+    int stamina;    // è€åŠ›
+    int strength;   // åŠ›é‡
+    int agility;    // æ•æ·
+    int intellect;  // æ™ºåŠ›
+    int maxHealth;  // æœ€å¤§ç”Ÿå‘½å€¼
+    int maxMana;    // æœ€å¤§é­”æ³•å€¼
+    int attack;     // æ”»å‡»åŠ›
+    int defense;    // é˜²å¾¡åŠ›
+    vector<string> skills;  // æŠ€èƒ½åˆ—è¡¨
 
-    int stamina;    // ÄÍÁ¦
-    int strength;   // Á¦Á¿
-    int agility;    // Ãô½İ
-    int intellect;    // ÖÇÁ¦
-    int maxHealth;  // ×î´óÉúÃüÖµ
-    int maxMana;  // ×î´óÄ§·¨Öµ
-    int attack;     // ¹¥»÷Á¦
-    int defense;    // ·ÀÓùÁ¦
-    vector<string> skills;  // ¼¼ÄÜÁĞ±í
-
-    // ¹¹Ôìº¯Êı
+    // æ„é€ å‡½æ•°
     Character(string charName, int charStamina, int charStrength, int charAgility, int charIntellect)
         : name(charName), stamina(charStamina), strength(charStrength), agility(charAgility), intellect(charIntellect) {
+        level = 1;
+        experience = level * 100;
         maxHealth = stamina * 10;
         maxMana = intellect * 10;
         attack = strength * 2;
@@ -32,32 +35,35 @@ public:
 
     }
 
-    // ÏÔÊ¾ÊôĞÔÃæ°å
+    // æ˜¾ç¤ºå±æ€§é¢æ¿
     void showAttributes() {
         cout << "=============================" << endl;
-        cout << "½ÇÉ«ÊôĞÔÃæ°å£º" << endl;
-        cout << "Ãû³Æ£º" << name << endl;
-        cout << "ÄÍÁ¦£º" << stamina << endl;
-        cout << "Á¦Á¿£º" << strength << endl;
-        cout << "Ãô½İ£º" << agility << endl;
-        cout << "ÖÇÁ¦£º" << intellect << endl;
+        cout << "è§’è‰²å±æ€§é¢æ¿ï¼š" << endl;
+        cout << "åç§°ï¼š" << name << endl;
+        cout << "ç­‰çº§ï¼š" << level << endl;
+        cout << "ç»éªŒå€¼ï¼š" << "0/"<<experience << endl;
         cout << "-----------------------------" << endl;
-        cout << "ÉúÃüÖµ£º" << maxHealth << endl;
-        cout << "Ä§Á¦Öµ£º" << maxMana << endl;
-        cout << "¹¥»÷Á¦£º" << attack << endl;
-        cout << "·ÀÓùÁ¦£º" << defense << endl;
+        cout << "è€åŠ›ï¼š" << stamina << endl;
+        cout << "åŠ›é‡ï¼š" << strength << endl;
+        cout << "æ•æ·ï¼š" << agility << endl;
+        cout << "æ™ºåŠ›ï¼š" << intellect << endl;
+        cout << "-----------------------------" << endl;
+        cout << "ç”Ÿå‘½å€¼ï¼š" << maxHealth << endl;
+        cout << "é­”åŠ›å€¼ï¼š" << maxMana << endl;
+        cout << "æ”»å‡»åŠ›ï¼š" << attack << endl;
+        cout << "é˜²å¾¡åŠ›ï¼š" << defense << endl;
     }
 
-    // »ñµÃ¾­ÑéÖµ
+    // è·å¾—ç»éªŒå€¼
     void gainExperience(int experience) {
-        // ´¦Àí¾­ÑéÖµÂß¼­
+        // å¤„ç†ç»éªŒå€¼é€»è¾‘
     }
 
-    // ÏÔÊ¾¼¼ÄÜÁĞ±í
+    // æ˜¾ç¤ºæŠ€èƒ½åˆ—è¡¨
     void showSkills() {
-        cout << "¼¼ÄÜÁĞ±í£º" << endl;
+        cout << "æŠ€èƒ½åˆ—è¡¨ï¼š" << endl;
         if (skills.empty()) {
-            cout << "ÎŞ¿ÉÓÃ¼¼ÄÜ¡£" << endl;
+            cout << "æ— å¯ç”¨æŠ€èƒ½ã€‚" << endl;
         }
         else {
             for (int i = 0; i < skills.size(); ++i) {
@@ -66,94 +72,94 @@ public:
         }
     }
 
-    // Ê¹ÓÃ¼¼ÄÜ
+    // ä½¿ç”¨æŠ€èƒ½
     void useSkill(int skillIndex) {
         if (skillIndex >= 0 && skillIndex < skills.size()) {
             string skillName = skills[skillIndex];
-            cout << name << "Ê¹ÓÃÁË¼¼ÄÜ " << skillName << "£¡" << endl;
+            cout << name << "ä½¿ç”¨äº†æŠ€èƒ½ " << skillName << "ï¼" << endl;
 
-            // ¸ù¾İ¼¼ÄÜÃû×ÖÖ´ĞĞÏàÓ¦µÄĞ§¹û
-            if (skillName == "»ğÇòÊõ" and maxMana>=10) {
+            // æ ¹æ®æŠ€èƒ½åå­—æ‰§è¡Œç›¸åº”çš„æ•ˆæœ
+            if (skillName == "ç«çƒæœ¯" and maxMana >= 10) {
                 int damage = intellect * 3;
                 maxMana = maxMana - 10;
-                cout << skillName << "¶Ô¹ÖÎïÔì³ÉÁË " << damage << " µã»ğÑæÉËº¦£¡" << endl;
-                cout << skillName << "ÏûºÄÄ§Á¦Öµ10 ," << " µ±Ç°Ä§Á¦Öµ£º" << maxMana << endl;
+                cout << skillName << "å¯¹æ€ªç‰©é€ æˆäº† " << damage << " ç‚¹ç«ç„°ä¼¤å®³ï¼" << endl;
+                cout << skillName << "æ¶ˆè€—é­”åŠ›å€¼10 ," << " å½“å‰é­”åŠ›å€¼ï¼š" << maxMana << endl;
             }
-            else if (skillName == "±ù¶³Êõ") {
+            else if (skillName == "å†°å†»æœ¯") {
                 int damage = intellect * 4;
-                cout << skillName << "¶Ô¹ÖÎïÔì³ÉÁË " << damage << " µã±ù¶³ÉËº¦£¡" << endl;
-                cout << skillName << "ÏûºÄÄ§Á¦Öµ10 ," << " µ±Ç°Ä§Á¦Öµ£º" << maxMana << endl;
+                cout << skillName << "å¯¹æ€ªç‰©é€ æˆäº† " << damage << " ç‚¹å†°å†»ä¼¤å®³ï¼" << endl;
+                cout << skillName << "æ¶ˆè€—é­”åŠ›å€¼10 ," << " å½“å‰é­”åŠ›å€¼ï¼š" << maxMana << endl;
             }
-            else if (skillName == "ÉÁµçÁ´") {
+            else if (skillName == "é—ªç”µé“¾") {
                 int damage = intellect * 5;
-                cout << skillName << "¶Ô¹ÖÎïÔì³ÉÁË " << damage << " µãÉÁµçÉËº¦£¡" << endl;
-                cout << skillName << "ÏûºÄÄ§Á¦Öµ10 ," << " µ±Ç°Ä§Á¦Öµ£º" << maxMana << endl;
+                cout << skillName << "å¯¹æ€ªç‰©é€ æˆäº† " << damage << " ç‚¹é—ªç”µä¼¤å®³ï¼" << endl;
+                cout << skillName << "æ¶ˆè€—é­”åŠ›å€¼10 ," << " å½“å‰é­”åŠ›å€¼ï¼š" << maxMana << endl;
             }
-            else if (skillName == "ÖÎÁÆÊõ") {
+            else if (skillName == "æ²»ç–—æœ¯") {
                 int healAmount = intellect * 5;
-                cout << skillName << "Îª×Ô¼º»Ö¸´ÁË " << healAmount << " µãÉúÃüÖµ£¡" << endl;
-                cout << skillName << "ÏûºÄÄ§Á¦Öµ10 ," << " µ±Ç°Ä§Á¦Öµ£º" << maxMana << endl;
+                cout << skillName << "ä¸ºè‡ªå·±æ¢å¤äº† " << healAmount << " ç‚¹ç”Ÿå‘½å€¼ï¼" << endl;
+                cout << skillName << "æ¶ˆè€—é­”åŠ›å€¼10 ," << " å½“å‰é­”åŠ›å€¼ï¼š" << maxMana << endl;
             }
             else {
-            cout << skillName << "Ä§Á¦Öµ²»×ã£¡ " << " µ±Ç°Ä§Á¦Öµ£º" << maxMana << endl;
+                cout << skillName << "é­”åŠ›å€¼ä¸è¶³ï¼ " << " å½“å‰é­”åŠ›å€¼ï¼š" << maxMana << endl;
             }
         }
         else {
-            cout << "ÎŞĞ§µÄÑ¡Ôñ¡£" << endl;
+            cout << "æ— æ•ˆçš„é€‰æ‹©ã€‚" << endl;
         }
     }
 };
 
-// ×°±¸Àà
+// è£…å¤‡ç±»
 class Equipment {
 public:
     string name;
-    int type;     // ×°±¸ÀàĞÍ: 1 - ÎäÆ÷£¬2 - »¤¼×£¬3 - ÊÎÆ·
-    int bonus;    // »ù´¡ÊôĞÔ¼Ó³É
-    int specialBonus;    // ¼«Æ·ÊôĞÔ¼Ó³É£¬¸ù¾İ×°±¸ÀàĞÍ¼Ó³É²»Í¬
+    int type;     // è£…å¤‡ç±»å‹: 1 - æ­¦å™¨ï¼Œ2 - æŠ¤ç”²ï¼Œ3 - é¥°å“
+    int bonus;    // åŸºç¡€å±æ€§åŠ æˆ
+    int specialBonus;    // æå“å±æ€§åŠ æˆï¼Œæ ¹æ®è£…å¤‡ç±»å‹åŠ æˆä¸åŒ
 
-    // ¹¹Ôìº¯Êı
+    // æ„é€ å‡½æ•°
     Equipment(string equipName, int equipType, int equipBonus, int equipSpecialBonus)
         : name(equipName), type(equipType), bonus(equipBonus), specialBonus(equipSpecialBonus) {}
 
-    // Éú³ÉËæ»úµÄ¼«Æ·ÊôĞÔ
+    // ç”Ÿæˆéšæœºçš„æå“å±æ€§
     void generateSpecialBonus() {
-        if (type == 1) {  // ÎäÆ÷
+        if (type == 1) {  // æ­¦å™¨
             std::random_device rd;
             std::mt19937 gen(rd());
             std::uniform_real_distribution<double> dis(0.0, 1.0);
 
-            // ÒÔÒ»¶¨µÄ¸ÅÂÊÉú³É¼«Æ·ÊôĞÔ
+            // ä»¥ä¸€å®šçš„æ¦‚ç‡ç”Ÿæˆæå“å±æ€§
             if (dis(gen) < 0.2) {
-                // Éú³É3%Á¦Á¿¼Ó³É
+                // ç”Ÿæˆ3%åŠ›é‡åŠ æˆ
                 specialBonus = 3;
             }
             else {
                 specialBonus = 0;
             }
         }
-        else if (type == 2) {  // »¤¼×
+        else if (type == 2) {  // æŠ¤ç”²
             std::random_device rd;
             std::mt19937 gen(rd());
             std::uniform_real_distribution<double> dis(0.0, 1.0);
 
-            // ÒÔÒ»¶¨µÄ¸ÅÂÊÉú³É¼«Æ·ÊôĞÔ
+            // ä»¥ä¸€å®šçš„æ¦‚ç‡ç”Ÿæˆæå“å±æ€§
             if (dis(gen) < 0.2) {
-                // Éú³É5µãÄÍÁ¦¼Ó³É
+                // ç”Ÿæˆ5ç‚¹è€åŠ›åŠ æˆ
                 specialBonus = 5;
             }
             else {
                 specialBonus = 0;
             }
         }
-        else if (type == 3) {  // ÊÎÆ·
+        else if (type == 3) {  // é¥°å“
             std::random_device rd;
             std::mt19937 gen(rd());
             std::uniform_real_distribution<double> dis(0.0, 1.0);
 
-            // ÒÔÒ»¶¨µÄ¸ÅÂÊÉú³É¼«Æ·ÊôĞÔ
+            // ä»¥ä¸€å®šçš„æ¦‚ç‡ç”Ÿæˆæå“å±æ€§
             if (dis(gen) < 0.2) {
-                // Éú³É2%Ã¿´ÎÕ½¶·ºó»ØÑªÊôĞÔ
+                // ç”Ÿæˆ2%æ¯æ¬¡æˆ˜æ–—åå›è¡€å±æ€§
                 specialBonus = 2;
             }
             else {
@@ -163,31 +169,31 @@ public:
     }
 };
 
-// ¹ÖÎïÀà
+// æ€ªç‰©ç±»
 class Monster {
 public:
     string name;
-    int maxHealth;  // ×î´óÉúÃüÖµ
-    int attack;     // ¹¥»÷Á¦
-    int defense;    // ·ÀÓùÁ¦
+    int maxHealth;  // æœ€å¤§ç”Ÿå‘½å€¼
+    int attack;     // æ”»å‡»åŠ›
+    int defense;    // é˜²å¾¡åŠ›
 
-    // ¹¹Ôìº¯Êı
+    // æ„é€ å‡½æ•°
     Monster(string monName, int monMaxHealth, int monAttack, int monDefense)
         : name(monName), maxHealth(monMaxHealth), attack(monAttack), defense(monDefense) {}
 
-    // ÏÔÊ¾¹ÖÎïÊôĞÔ
+    // æ˜¾ç¤ºæ€ªç‰©å±æ€§
     void showAttributes() {
         cout << "=============================" << endl;
-        cout << "¹ÖÎïÊôĞÔ£º" << endl;
-        cout << "Ãû³Æ£º" << name << endl;
-        cout << "ÉúÃüÖµ£º" << maxHealth << endl;
-        cout << "¹¥»÷Á¦£º" << attack << endl;
-        cout << "·ÀÓùÁ¦£º" << defense << endl;
+        cout << "æ€ªç‰©å±æ€§ï¼š" << endl;
+        cout << "åç§°ï¼š" << name << endl;
+        cout << "ç”Ÿå‘½å€¼ï¼š" << maxHealth << endl;
+        cout << "æ”»å‡»åŠ›ï¼š" << attack << endl;
+        cout << "é˜²å¾¡åŠ›ï¼š" << defense << endl;
         cout << "=============================" << endl;
     }
 };
 
-// ÓÎÏ·Àà
+// æ¸¸æˆç±»
 class Game {
 public:
     Character* player;
@@ -195,11 +201,11 @@ public:
     vector<Monster*> monsters;
     int currentLevel;
     int bossLevel;
-    vector<string> skillList;  // ¼¼ÄÜÁĞ±í
+    vector<string> skillList;  // æŠ€èƒ½åˆ—è¡¨
 
 public:
     Game(string playerName) {
-        player = new Character(playerName, 10, 5, 5,5);
+        player = new Character(playerName, 10, 5, 5, 5);
         currentLevel = 1;
         bossLevel = 5;
         initializeMonsters();
@@ -212,24 +218,24 @@ public:
         clearMonsters();
     }
 
-    // ³õÊ¼»¯¹ÖÎï
+    // åˆå§‹åŒ–æ€ªç‰©
     void initializeMonsters() {
-        monsters.push_back(new Monster("Ğ¡¹Ö1", 30, 8, 2));
-        monsters.push_back(new Monster("Ğ¡¹Ö2", 35, 10, 3));
-        monsters.push_back(new Monster("Ğ¡¹Ö3", 40, 12, 4));
-        monsters.push_back(new Monster("Ğ¡¹Ö4", 45, 14, 5));
-        monsters.push_back(new Monster("BOSS¹ÖÎï", 100, 20, 10));
+        monsters.push_back(new Monster("å°æ€ª1", 30, 8, 2));
+        monsters.push_back(new Monster("å°æ€ª2", 35, 10, 3));
+        monsters.push_back(new Monster("å°æ€ª3", 40, 12, 4));
+        monsters.push_back(new Monster("å°æ€ª4", 45, 14, 5));
+        monsters.push_back(new Monster("BOSSæ€ªç‰©", 100, 20, 10));
     }
 
-    // ³õÊ¼»¯¼¼ÄÜÁĞ±í
+    // åˆå§‹åŒ–æŠ€èƒ½åˆ—è¡¨
     void initializeSkills() {
-        skillList.push_back("»ğÇòÊõ");
-        skillList.push_back("±ù¶³Êõ");
-        skillList.push_back("ÉÁµçÁ´");
-        skillList.push_back("ÖÎÁÆÊõ");
+        skillList.push_back("ç«çƒæœ¯");
+        skillList.push_back("å†°å†»æœ¯");
+        skillList.push_back("é—ªç”µé“¾");
+        skillList.push_back("æ²»ç–—æœ¯");
     }
 
-    // Çå¿Õ¹ÖÎïÁĞ±í
+    // æ¸…ç©ºæ€ªç‰©åˆ—è¡¨
     void clearMonsters() {
         for (auto monster : monsters) {
             delete monster;
@@ -237,7 +243,7 @@ public:
         monsters.clear();
     }
 
-    // Çå¿Õ±³°ü
+    // æ¸…ç©ºèƒŒåŒ…
     void clearInventory() {
         for (auto item : inventory) {
             delete item;
@@ -245,46 +251,46 @@ public:
         inventory.clear();
     }
 
-    // Õ½¶·
+    // æˆ˜æ–—
     void battle() {
         Monster* currentMonster = getRandomMonster();
-        cout << "ÔâÓöÁË " << currentMonster->name << "£¡" << endl;
+        cout << "é­é‡äº† " << currentMonster->name << "ï¼" << endl;
 
         while (player->maxHealth > 0 && currentMonster->maxHealth > 0) {
-            // Íæ¼Ò»ØºÏ
+            // ç©å®¶å›åˆ
             playerTurn(currentMonster);
 
-            // ¼ì²é¹ÖÎïÊÇ·ñËÀÍö
+            // æ£€æŸ¥æ€ªç‰©æ˜¯å¦æ­»äº¡
             if (currentMonster->maxHealth <= 0) {
                 break;
             }
 
-            // ¹ÖÎï»ØºÏ
+            // æ€ªç‰©å›åˆ
             monsterTurn(currentMonster);
         }
 
         if (player->maxHealth <= 0) {
-            cout << "Äã±»»÷°ÜÁË£¡ÓÎÏ·½áÊø¡£" << endl;
+            cout << "ä½ è¢«å‡»è´¥äº†ï¼æ¸¸æˆç»“æŸã€‚" << endl;
         }
         else {
-            cout << "ÄãÕ½Ê¤ÁË " << currentMonster->name << "£¡»ñµÃÊ¤Àû£¡" << endl;
-            // »ñµÃ¾­ÑéÖµ
+            cout << "ä½ æˆ˜èƒœäº† " << currentMonster->name << "ï¼è·å¾—èƒœåˆ©ï¼" << endl;
+            // è·å¾—ç»éªŒå€¼
             int experience = currentMonster->maxHealth / 2;
             player->gainExperience(experience);
             player->maxMana += 10;
-            if (player->maxMana > player->intellect*10) { player->maxMana = player->intellect * 10; }
-            // µôÂä×°±¸
+            if (player->maxMana > player->intellect * 10) { player->maxMana = player->intellect * 10; }
+            // æ‰è½è£…å¤‡
             dropEquipment();
         }
 
         cout << "=============================" << endl;
     }
 
-    // Íæ¼Ò»ØºÏ
+    // ç©å®¶å›åˆ
     void playerTurn(Monster* currentMonster) {
-        cout << "ÂÖµ½ÄãµÄ»ØºÏ£¬ÇëÑ¡Ôñ²Ù×÷£º" << endl;
-        cout << "[1] ÆÕÍ¨¹¥»÷" << endl;
-        cout << "[2] Ê¹ÓÃ¼¼ÄÜ" << endl;
+        cout << "è½®åˆ°ä½ çš„å›åˆï¼Œè¯·é€‰æ‹©æ“ä½œï¼š" << endl;
+        cout << "[1] æ™®é€šæ”»å‡»" << endl;
+        cout << "[2] ä½¿ç”¨æŠ€èƒ½" << endl;
 
         int choice;
         cin >> choice;
@@ -297,25 +303,25 @@ public:
             playerUseSkill(currentMonster);
             break;
         default:
-            cout << "ÎŞĞ§µÄÑ¡Ôñ¡£" << endl;
+            cout << "æ— æ•ˆçš„é€‰æ‹©ã€‚" << endl;
             break;
         }
     }
 
-    // Íæ¼ÒÆÕÍ¨¹¥»÷
+    // ç©å®¶æ™®é€šæ”»å‡»
     void playerAttack(Monster* currentMonster) {
         int playerDamage = player->attack - currentMonster->defense;
         if (playerDamage < 0) {
             playerDamage = 0;
         }
         currentMonster->maxHealth -= playerDamage;
-        cout << player->name << "¶Ô" << currentMonster->name << "Ôì³ÉÁË " << playerDamage << " µãÉËº¦£¡" << endl;
+        cout << player->name << "å¯¹" << currentMonster->name << "é€ æˆäº† " << playerDamage << " ç‚¹ä¼¤å®³ï¼" << endl;
     }
 
-    // Íæ¼ÒÊ¹ÓÃ¼¼ÄÜ
+    // ç©å®¶ä½¿ç”¨æŠ€èƒ½
     void playerUseSkill(Monster* currentMonster) {
         player->showSkills();
-        cout << "ÇëÑ¡ÔñÒªÊ¹ÓÃµÄ¼¼ÄÜ±àºÅ£º";
+        cout << "è¯·é€‰æ‹©è¦ä½¿ç”¨çš„æŠ€èƒ½ç¼–å·ï¼š";
         int skillIndex;
         cin >> skillIndex;
 
@@ -323,98 +329,98 @@ public:
             player->useSkill(skillIndex);
         }
         else {
-            cout << "ÎŞĞ§µÄÑ¡Ôñ¡£" << endl;
+            cout << "æ— æ•ˆçš„é€‰æ‹©ã€‚" << endl;
         }
     }
 
-    // ¹ÖÎï»ØºÏ
+    // æ€ªç‰©å›åˆ
     void monsterTurn(Monster* currentMonster) {
         int monsterDamage = currentMonster->attack - player->defense;
         if (monsterDamage < 0) {
             monsterDamage = 0;
         }
         player->maxHealth -= monsterDamage;
-        cout << currentMonster->name << "¶Ô" << player->name << "Ôì³ÉÁË " << monsterDamage << " µãÉËº¦£¡" << endl;
+        cout << currentMonster->name << "å¯¹" << player->name << "é€ æˆäº† " << monsterDamage << " ç‚¹ä¼¤å®³ï¼" << endl;
     }
 
-    // Ëæ»ú»ñÈ¡Ò»¸ö¹ÖÎï
+    // éšæœºè·å–ä¸€ä¸ªæ€ªç‰©
     Monster* getRandomMonster() {
         int index = rand() % monsters.size();
         return monsters[index];
     }
 
-    // µôÂä×°±¸
+    // æ‰è½è£…å¤‡
     void dropEquipment() {
         int equipType = rand() % 3 + 1;
         int randomBonus = rand() % 5 + 1;
 
         string equipName;
         int equipBonus;
-        int equipSpecialBonus = 0;    // ¼«Æ·ÊôĞÔ¼Ó³É£¬¸ù¾İ×°±¸ÀàĞÍ¼Ó³É²»Í¬
+        int equipSpecialBonus = 0;    // æå“å±æ€§åŠ æˆï¼Œæ ¹æ®è£…å¤‡ç±»å‹åŠ æˆä¸åŒ
         switch (equipType) {
         case 1:
-            equipName = "ÎäÆ÷";
+            equipName = "æ­¦å™¨";
             equipBonus = player->strength + randomBonus;
             break;
         case 2:
-            equipName = "»¤¼×";
+            equipName = "æŠ¤ç”²";
             equipBonus = player->stamina + randomBonus;
             break;
         case 3:
-            equipName = "ÊÎÆ·";
+            equipName = "é¥°å“";
             equipBonus = randomBonus;
             break;
         }
         Equipment* newEquip = new Equipment(equipName, equipType, equipBonus, equipSpecialBonus);
         inventory.push_back(newEquip);
-        cout << "Äã»ñµÃÁËÒ»¼ş×°±¸£º" << newEquip->name << "£¬ÊôĞÔ¼Ó³É£º" << newEquip->bonus << endl;
+        cout << "ä½ è·å¾—äº†ä¸€ä»¶è£…å¤‡ï¼š" << newEquip->name << "ï¼Œå±æ€§åŠ æˆï¼š" << newEquip->bonus << endl;
     }
 
-    // Õ¹Ê¾±³°üÖĞµÄ×°±¸
+    // å±•ç¤ºèƒŒåŒ…ä¸­çš„è£…å¤‡
     void showInventory() {
-        cout << "±³°üÖĞµÄ×°±¸£º" << endl;
+        cout << "èƒŒåŒ…ä¸­çš„è£…å¤‡ï¼š" << endl;
         if (inventory.empty()) {
-            cout << "±³°üÎª¿Õ¡£" << endl;
+            cout << "èƒŒåŒ…ä¸ºç©ºã€‚" << endl;
         }
         else {
             for (int i = 0; i < inventory.size(); ++i) {
-                cout << "[" << i << "] " << inventory[i]->name << " (¼Ó³ÉÊôĞÔ£º" << inventory[i]->bonus << ")" << endl;
+                cout << "[" << i << "] " << inventory[i]->name << " (åŠ æˆå±æ€§ï¼š" << inventory[i]->bonus << ")" << endl;
             }
         }
     }
 
-    // ´©´÷×°±¸
+    // ç©¿æˆ´è£…å¤‡
     void equipFromInventory(int index) {
         if (index >= 0 && index < inventory.size()) {
             Equipment* equip = inventory[index];
 
             switch (equip->type) {
-            case 1:  // ÎäÆ÷
+            case 1:  // æ­¦å™¨
                 player->attack += equip->bonus;
                 player->strength += equip->bonus / 2;
                 break;
-            case 2:  // »¤¼×
+            case 2:  // æŠ¤ç”²
                 player->defense += equip->bonus;
                 player->stamina += equip->bonus / 2;
                 break;
-            case 3:  // ÊÎÆ·
+            case 3:  // é¥°å“
                 player->maxHealth += player->maxHealth * equip->bonus / 100;
                 break;
             }
 
-            cout << "Äã×°±¸ÁË " << equip->name << "£¬ÊôĞÔ¼Ó³É£º" << equip->bonus << endl;
+            cout << "ä½ è£…å¤‡äº† " << equip->name << "ï¼Œå±æ€§åŠ æˆï¼š" << equip->bonus << endl;
             inventory.erase(inventory.begin() + index);
         }
         else {
-            cout << "ÎŞĞ§µÄÑ¡Ôñ¡£" << endl;
+            cout << "æ— æ•ˆçš„é€‰æ‹©ã€‚" << endl;
         }
     }
 
-    // Õ¹Ê¾¿ÉÑ§Ï°µÄ¼¼ÄÜÁĞ±í
+    // å±•ç¤ºå¯å­¦ä¹ çš„æŠ€èƒ½åˆ—è¡¨
     void showSkillList() {
-        cout << "¿ÉÑ§Ï°µÄ¼¼ÄÜÁĞ±í£º" << endl;
+        cout << "å¯å­¦ä¹ çš„æŠ€èƒ½åˆ—è¡¨ï¼š" << endl;
         if (skillList.empty()) {
-            cout << "ÎŞ¿ÉÑ§Ï°µÄ¼¼ÄÜ¡£" << endl;
+            cout << "æ— å¯å­¦ä¹ çš„æŠ€èƒ½ã€‚" << endl;
         }
         else {
             for (int i = 0; i < skillList.size(); ++i) {
@@ -423,40 +429,40 @@ public:
         }
     }
 
-    // ½«¼¼ÄÜÌí¼Óµ½½ÇÉ«µÄ¼¼ÄÜÁĞ±íÖĞ
+    // å°†æŠ€èƒ½æ·»åŠ åˆ°è§’è‰²çš„æŠ€èƒ½åˆ—è¡¨ä¸­
     void addSkillToCharacter(int skillIndex) {
         if (skillIndex >= 0 && skillIndex < skillList.size()) {
             string skillName = skillList[skillIndex];
             player->skills.push_back(skillName);
-            cout << player->name << "Ñ§Ï°ÁË¼¼ÄÜ " << skillName << "£¡" << endl;
+            cout << player->name << "å­¦ä¹ äº†æŠ€èƒ½ " << skillName << "ï¼" << endl;
             skillList.erase(skillList.begin() + skillIndex);
         }
         else {
-            cout << "ÎŞĞ§µÄÑ¡Ôñ¡£" << endl;
+            cout << "æ— æ•ˆçš„é€‰æ‹©ã€‚" << endl;
         }
     }
 };
 
 int main() {
-    srand(time(0));  // Ëæ»úÊıÖÖ×Ó
+    srand(time(0));  // éšæœºæ•°ç§å­
 
     string playerName;
-    cout << "»¶Ó­À´µ½½ÇÉ«°çÑİÓÎÏ·£¡" << endl;
-    cout << "ÇëÊäÈëÄãµÄ½ÇÉ«Ãû×Ö£º";
+    cout << "æ¬¢è¿æ¥åˆ°è§’è‰²æ‰®æ¼”æ¸¸æˆï¼" << endl;
+    cout << "è¯·è¾“å…¥ä½ çš„è§’è‰²åå­—ï¼š";
     cin >> playerName;
 
     Game game(playerName);
 
     while (true) {
         cout << "=============================" << endl;
-        cout << "ÇëÑ¡Ôñ²Ù×÷£º" << endl;
-        cout << "[1] ¿ªÊ¼Õ½¶·" << endl;
-        cout << "[2] ²é¿´½ÇÉ«ÊôĞÔÃæ°å" << endl;
-        cout << "[3] ²é¿´±³°ü" << endl;
-        cout << "[4] ´©´÷×°±¸" << endl;
-        cout << "[5] ²é¿´¿ÉÑ§Ï°µÄ¼¼ÄÜ" << endl;
-        cout << "[6] Ñ§Ï°¼¼ÄÜ" << endl;
-        cout << "[7] ÍË³öÓÎÏ·" << endl;
+        cout << "è¯·é€‰æ‹©æ“ä½œï¼š" << endl;
+        cout << "[1] å¼€å§‹æˆ˜æ–—" << endl;
+        cout << "[2] æŸ¥çœ‹è§’è‰²å±æ€§é¢æ¿" << endl;
+        cout << "[3] æŸ¥çœ‹èƒŒåŒ…" << endl;
+        cout << "[4] ç©¿æˆ´è£…å¤‡" << endl;
+        cout << "[5] æŸ¥çœ‹å¯å­¦ä¹ çš„æŠ€èƒ½" << endl;
+        cout << "[6] å­¦ä¹ æŠ€èƒ½" << endl;
+        cout << "[7] é€€å‡ºæ¸¸æˆ" << endl;
 
         int choice;
         cin >> choice;
@@ -473,7 +479,7 @@ int main() {
             break;
         case 4: {
             game.showInventory();
-            cout << "ÇëÑ¡ÔñÒª´©´÷µÄ×°±¸±àºÅ£º";
+            cout << "è¯·é€‰æ‹©è¦ç©¿æˆ´çš„è£…å¤‡ç¼–å·ï¼š";
             int equipIndex;
             cin >> equipIndex;
             game.equipFromInventory(equipIndex);
@@ -484,17 +490,17 @@ int main() {
             break;
         case 6: {
             game.showSkillList();
-            cout << "ÇëÑ¡ÔñÒªÑ§Ï°µÄ¼¼ÄÜ±àºÅ£º";
+            cout << "è¯·é€‰æ‹©è¦å­¦ä¹ çš„æŠ€èƒ½ç¼–å·ï¼š";
             int skillIndex;
             cin >> skillIndex;
             game.addSkillToCharacter(skillIndex);
             break;
         }
         case 7:
-            cout << "ÓÎÏ·½áÊø¡£" << endl;
+            cout << "æ¸¸æˆç»“æŸã€‚" << endl;
             return 0;
         default:
-            cout << "ÎŞĞ§µÄÑ¡Ôñ£¬ÇëÖØĞÂÑ¡Ôñ¡£" << endl;
+            cout << "æ— æ•ˆçš„é€‰æ‹©ï¼Œè¯·é‡æ–°é€‰æ‹©ã€‚" << endl;
             break;
         }
     }
